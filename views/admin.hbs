@@ -1,0 +1,287 @@
+<header style="display: flex; justify-content:center; background-color: azure;">
+  <h1>{{title}}</h1>
+  <h3 style="margin-left : 5rem">12171800 심정호</h3>
+</header>
+<main
+  style="border-style:groove;display: flex; justify-content:center; flex-direction:column; background-color:rgb(176, 139, 194);"
+>
+  <div>
+    <h2>user</h2>
+    <table>
+      <tr>
+        <td>id</td>
+        <td>password</td>
+        <td>Role</td>
+      </tr>
+      {{#each User}}
+        <form method="post">
+          <tr>
+            <td>{{Id}}</td>
+            <td>{{Password}}</td>
+            <td>{{Role}}</td>
+            <td style="border: none; margin-left: 10px;">
+              <button
+                style="margin-left: 10px;"
+                name="delBtn"
+                type="submit"
+                value="{{Dnumber}}"
+                formaction="/delete"
+              >
+                삭제
+              </button>
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+  </div>
+
+  <div
+    style="display: flex;
+  margin-top:5%;flex-direction:column; border-style:groove;"
+  >
+    <h2>공항 정보</h2>
+    <table style="border-radius: 2%">
+      <tr style="border-top: 3px;">
+        <td>Airport_code</td>
+        <td>Name</td>
+        <td>City</td>
+        <td>State</td>
+      </tr>
+      {{#each airport}}
+        <form name="insert_Airport" method="post" action="/admin">
+          <tr>
+            <td>{{Airport_code}}</td>
+            <td>{{Name}}</td>
+            <td>{{City}}</td>
+            <td>{{State}}</td>
+            <td style="border: none; margin-left: 10px;">
+              <button
+                style="margin-left: 10px;"
+                name="AirportdelBtn"
+                type="submit"
+                value="{{Airport_code}}"
+                formation="/admin"
+              >
+                삭제
+              </button>
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+    <form name="insertAirport" method="post" action="/insertAirport">
+      <div>
+        <label for="Airport_code">Airport_code</label>
+        <input
+          id="insert_Airport_Code"
+          name="insert_Airport_Code"
+          type="text"
+          required
+          placeholder="Airport_Code"
+        />
+      </div>
+      <div>
+        <label for="Airport_Name">Name</label>
+        <input
+          id="insert_Airport_Name"
+          name="insert_Airport_Name"
+          type="text"
+          required
+          placeholder="Airport_Name"
+        />
+      </div>
+      <div>
+        <label for="Airport_City">City</label>
+        <input
+          id="insert_Airport_City"
+          name="insert_Airport_City"
+          type="text"
+          required
+          placeholder="Airport_City"
+        />
+      </div>
+      <div>
+        <label for="Airport_State">Airport_State</label>
+        <input
+          type="text"
+          id="insert_Airport_State"
+          name="insert_Airport_State"
+          required
+          placeholder="Airport_State"
+        />
+      </div>
+      <div>
+        <input type="submit" value="Airport_insert" />
+      </div>
+    </form>
+
+  </div>
+
+  <div
+    style="display: flex; margin-top:5%; flex-direction:column; border-style:groove;"
+  >
+    <h2>비행기 정보</h2>
+    <table>
+      <tr>
+        <td>airplane_id</td>
+        <td>Airplane_type</td>
+        <td>Max_seats</td>
+        <td>Company</td>
+      </tr>
+      {{#each airplane}}
+        <form name="Airplane" method="post" action="/deleteAirplane">
+          <tr>
+            <td>{{Airplane_id}}</td>
+            <td>{{Airplane_type}}</td>
+            <td>{{Max_seats}}</td>
+            <td>{{Company}}</td>
+            <td style="border: none; margin-left: 10px;">
+              <button
+                style="margin-left: 10px;"
+                name="AirplanedelBtn"
+                type="submit"
+                value="{{Airplane_id}}"
+                formation="/deleteAirplane"
+              >
+                삭제
+              </button>
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+
+    <form name="insertAirplane" method="post" action="/insertAirplane">
+      <div>
+        <label for="Airplane_id">Airport_id</label>
+        <input
+          id="insert_Airplane_id"
+          name="insert_Airplane_id"
+          type="text"
+          required
+          placeholder="Airplane_id"
+        />
+      </div>
+      <div>
+        <label for="Airplane_Type">Airplane_Type</label>
+        <input
+          id="insert_Airplane_Type"
+          name="insert_Airplane_Type"
+          type="text"
+          required
+          placeholder="Airplane_Type"
+        />
+      </div>
+      <div>
+        <input type="submit" value="Airplane_insert" />
+      </div>
+    </form>
+  </div>
+
+  <div
+    style="margin-top: 5%; display :flex; flex-direction:column; border-style:groove;"
+  >
+    <h2>항공 구간 정보</h2>
+    <table>
+      <tr>
+        <td>Flight_number</td>
+        <td>leg_number</td>
+        <td>Date</td>
+        <td>Number_of_available_seats</td>
+        <td>Airplane_id</td>
+        <td>Fair</td>
+      </tr>
+      {{#each legInstance}}
+        <form name="leg_instance" method="post" action="/deleteLegInstance">
+          <tr>
+            <td>{{Flight_number}}</td>
+            <td>{{Leg_number}}</td>
+            <td>{{Date}}</td>
+            <td>{{Number_Of_Available_Seats}}</td>
+            <td>{{Airplane_id}}</td>
+            <td>{{Fair}}</td>
+
+            <td style="border: none; margin-left: 10px;">
+              <button
+                style="margin-left: 10px;"
+                name="LegInstancedelBtn"
+                type="submit"
+                value="{{Flight_number}}{{Leg_number}}{{Airplane_id}}"
+                formation="/deleteLegInstance"
+              >
+                삭제
+              </button>
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+
+    <form name="insertLegInstance" method="post" action="/insertLegInstance">
+      <div>
+        <label for="Flight_number">Flight_number</label>
+        <input
+          id="insert_Flight_number"
+          name="insert_Flight_number"
+          type="text"
+          required
+          placeholder="Flight_number"
+        />
+      </div>
+      <div>
+        <label for="leg_number">leg_number</label>
+        <input
+          id="insert_Leg_number"
+          name="insert_Leg_number"
+          type="text"
+          required
+          placeholder="Leg_number"
+        />
+      </div>
+      <div>
+        <label for="Date">Date</label>
+        <input
+          id="insert_Date"
+          name="insert_Date"
+          type="text"
+          required
+          placeholder="Date"
+        />
+      </div>
+      <div>
+        <label for="Number_Of_Available_Seats">Number_Of_Available_seats</label>
+        <input
+          id="insert_Number_Of_Available_Seats"
+          name="insert_Number_Of_Available_Seats"
+          type="text"
+          required
+          placeholder="Number_Of_Available_Seats"
+        />
+      </div>
+      <div>
+        <label for="Airplane_id">Airplane_id</label>
+        <input
+          id="insert_Airplane_id"
+          name="insert_Airplane_id"
+          type="text"
+          required
+          placeholder="Airplane_id"
+        />
+      </div>
+      <div>
+        <label for="Fair">Fair</label>
+        <input
+          id="insert_Fair"
+          name="insert_Fair"
+          type="text"
+          required
+          placeholder="Airplane_id"
+        />
+      </div>
+      <div>
+        <input type="submit" value="legInstance_insert" />
+      </div>
+    </form>
+  </div>
+</main>

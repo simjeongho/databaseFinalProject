@@ -1,0 +1,206 @@
+<header
+  style="display: flex; justify-content:center; background-color: #F5Df4d;"
+>
+  <h1>{{title}}</h1>
+</header>
+<main>
+  <section
+    style="display: flex; border-style:groove; flex-direction:column; justify-content:center; align-items:center; background-color:#939597"
+  >
+    <h2>예약 가능한 항공편</h2>
+    <script>
+      const setAv = 0;
+    </script>
+    <table>
+      <tr>
+        <td>Flight_number</td>
+        <td>leg_number</td>
+        <td>Date</td>
+        <td>Number_of_available_seats</td>
+        <td>Airplane_id</td>
+        <td>Fair</td>
+        <td>Departure_Airport_code</td>
+        <td>Arrival_airport_code</td>
+        <td>Departure_City</td>
+      </tr>
+      {{#each Av}}
+        <form name="available_leg_instance" method="post" action="/Reservation">
+          <tr>
+            <td>{{Flight_number}}</td>
+            <td>{{leg_number}}</td>
+            <td>{{Date}}</td>
+            <td>{{Number_of_available_seats}}</td>
+            <td>{{Airplane_id}}</td>
+            <td>{{Fair}}</td>
+            <td>{{departure_airport_code}}</td>
+            <td>{{arrival_airport_code}}</td>
+            <td>{{departureCity}}</td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+  </section>
+
+  <section style="display: flex; justify-content:center; align-items:center;">
+    <section
+      style="display: flex; border-style:groove; flex-direction:column; justify-content:center; align-items:center; width:40%;background-color:#939597"
+    >
+      <h2>예약하기</h2>
+      <form name="ReservationForm" method="post" action="/Reservation">
+        <div>
+          <label for="Flight_number">Flight_number</label>
+          <input
+            id="insert_Flight_Reservate"
+            name="insert_Flight_Reservate"
+            type="text"
+            required
+            placeholder="Flight_number"
+          />
+        </div>
+        <div>
+          <label for="Leg_number">Leg_number</label>
+          <input
+            id="insert_Leg_number_Reservate"
+            name="insert_Leg_number_Reservate"
+            type="text"
+            required
+            placeholder="Leg_number"
+          />
+        </div>
+        <div>
+          <label for="Date">Date</label>
+          <input
+            id="insert_Date_Reservate"
+            name="insert_Date_Reservate"
+            type="text"
+            required
+            placeholder="Date"
+          />
+        </div>
+        <div>
+          <label for="Seat_Number">Seat_Number</label>
+          <input
+            id="insert_Seat_Number"
+            name="insert_Seat_Number"
+            type="text"
+            required
+            placeholder="Seat_Number"
+          />
+        </div>
+        <div>
+          <label for="Customer_Name">Customer_Name</label>
+          <input
+            id="insert_Customer_Name"
+            name="insert_Customer_Name"
+            type="text"
+            required
+            placeholder="이름을 입력하세요"
+          />
+        </div>
+        <div>
+          <label for="Customer_Phone">Customer_Phone</label>
+          <input
+            id="insert_Customer_Phone"
+            name="insert_Customer_Phone"
+            type="text"
+            required
+            placeholder="전화번호를 입력하세요"
+          />
+        </div>
+        <div>
+          <label for="Airplane_id">Airplane_id</label>
+          <input
+            id="insert_Airplane_id_Reservation"
+            name="insert_Airplane_id_Reservate"
+            type="text"
+            required
+            placeholder="비행기 코드를 입력하세요"
+          />
+        </div>
+        <div>
+          <input type="submit" value="Reservation" />
+        </div>
+      </form>
+    </section>
+
+    <section
+      style="width: 60%;display: flex; border-style:groove; flex-direction:column; justify-content:center; align-items:center;background-color:#939597"
+    >
+      <h2>공항 코드</h2>
+      <table>
+        <tr>
+          <td>Airport_code</td>
+          <td>Name</td>
+          <td>City</td>
+          <td>State</td>
+        </tr>
+        {{#each Airport}}
+          <form
+            name="available_leg_instance"
+            method="post"
+            action="/showAvailableInstance"
+          >
+            <tr>
+              <td>{{Airport_code}}</td>
+              <td>{{Name}}</td>
+              <td>{{City}}</td>
+              <td>{{State}}</td>
+            </tr>
+          </form>
+        {{/each}}
+      </table>
+    </section>
+  </section>
+
+  <section
+    style="display: flex; flex-direction:column; justify-content:center; align-items:center;background-color: #F5Df4d;"
+  >
+    <h2>
+      예약 조회
+    </h2>
+    <table>
+      <tr>
+        <td>Flight_number</td>
+        <td>leg_number</td>
+        <td>Date</td>
+        <td>Seat_number</td>
+        <td>Customer_name</td>
+        <td>Customer_phone</td>
+        <td>Airplane_id</td>
+        <td>Arrival_Airport_Code</td>
+        <td>Departure_Airport_Code</td>
+      </tr>
+      {{#each Seat_Reservation}}
+        <form
+          name="available_leg_instance"
+          method="post"
+          action="/deleteReservation"
+        >
+          <tr>
+            <td>{{Flight_number}}</td>
+            <td>{{Leg_number}}</td>
+            <td>{{Date}}</td>
+            <td>{{Seat_number}}</td>
+            <td>{{Customer_name}}</td>
+            <td>{{Customer_phone}}</td>
+            <td>{{Airplane_id}}</td>
+            <td>{{Arrival_Airport_Code}}</td>
+            <td>{{Departure_Airport_Code}}</td>
+            <td style="border: none; margin-left: 10px;">
+              <button
+                style="margin-left: 10px;"
+                name="ReservationdelBtn"
+                type="submit"
+                value="{{Flight_number}}{{Leg_number}}{{Seat_number}}{{Airplane_id}}{{Date}}"
+                formation="/deleteReservation"
+              >
+                취소
+              </button>
+            </td>
+          </tr>
+        </form>
+      {{/each}}
+    </table>
+  </section>
+
+</main>
